@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import api from './services/api'
+import api from './services/api';
 
 import {
   SafeAreaView,
@@ -15,22 +15,22 @@ export default function App() {
   const [repositories, setRepositories] = useState([]);
 
   useEffect(()=>{
-    api.get('repositories').then(response=>
-      {setRepositories(response.data)
+    api.get('repositories').then(response=>{
+      setRepositories(response.data)
       });
   },[]);
 
   async function handleLikeRepository(id) {
-    const response = await api.post(`repositories/${id}/like}`); 
-    
-    const newRepo= repositories.map(repository => {
+    const response = await api.post(`repositories/${id}/like`);
+
+    const newRepository = repositories.map(repository =>  {
       if (repository.id === id){
-        return response.data;
-      } else{
-        return repository;
+        return response.data
+      }else{
+        return repository
       }
     });
-    setRepositories(newRepo);
+    setRepositories(newRepository);
     };
   
   return (
@@ -45,9 +45,9 @@ export default function App() {
           <Text style={styles.repository}>{repository.title}</Text>
 
           <View style={styles.techsContainer}>
-           { repository.techs.map(tech => 
-            <Text key={tech} style={styles.tech}>
-            {tech}
+           { repository.techs.map(techs => 
+            <Text key={techs} style={styles.tech}>
+            {techs}
             </Text>
             )}
           </View>
